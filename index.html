@@ -11,30 +11,43 @@
             --light: #E1E9F5;
             --dark: #0F1624;
             --success: #4CAF50;
+            --gradient-primary: linear-gradient(135deg, #0B3D91 0%, #1C6FD9 100%);
+            --gradient-secondary: linear-gradient(135deg, #FC3D21 0%, #FF6B4A 100%);
+            --gradient-vibrant: linear-gradient(135deg, #FF6B4A 0%, #FFC107 50%, #4CAF50 100%);
+            --gradient-header: linear-gradient(135deg, #0B3D91 0%, #1C6FD9 50%, #4CAF50 100%);
+            --gradient-button: linear-gradient(135deg, #FF6B4A 0%, #FFC107 100%);
+            --gradient-timeline: linear-gradient(135deg, #0B3D91 0%, #1C6FD9 100%);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
         }
-        
+
         header {
-            background-color: var(--primary);
+            background: var(--gradient-header);
             color: white;
             text-align: center;
-            padding: 2rem 1rem;
+            padding: 4rem 1rem;
             position: relative;
             overflow: hidden;
+            animation: gradientAnimation 10s ease infinite;
         }
-        
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         header::before {
             content: "";
             position: absolute;
@@ -48,66 +61,92 @@
             opacity: 0.2;
             z-index: 0;
         }
-        
+
         .header-content {
             position: relative;
             z-index: 1;
         }
-        
+
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
         }
-        
+
         .subheading {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             max-width: 800px;
             margin: 0 auto;
+            animation: fadeInUp 1s ease;
         }
-        
+
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
         main {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
-        
+
         .intro {
             text-align: center;
             margin-bottom: 3rem;
+            animation: fadeIn 1.5s ease;
         }
-        
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
         .timeline {
             position: relative;
             margin: 3rem 0;
         }
-        
+
         .timeline::before {
             content: '';
             position: absolute;
             width: 6px;
-            background-color: var(--primary);
+            background: var(--gradient-timeline);
             top: 0;
             bottom: 0;
             left: 50%;
             margin-left: -3px;
             border-radius: 10px;
+            animation: pulse 2s infinite;
         }
-        
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
         .timeline-container {
             padding: 10px 40px;
             position: relative;
             background-color: inherit;
             width: 50%;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
-        
+
         .timeline-container.left {
             left: 0;
         }
-        
+
         .timeline-container.right {
             left: 50%;
         }
-        
+
         .timeline-container::after {
             content: '';
             position: absolute;
@@ -119,45 +158,53 @@
             top: 15px;
             border-radius: 50%;
             z-index: 1;
+            animation: pulse 2s infinite;
         }
-        
+
         .timeline-container.right::after {
             left: -13px;
         }
-        
+
         .timeline-content {
             padding: 20px 30px;
             background-color: white;
             position: relative;
-            border-radius: 6px;
+            border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
+        .timeline-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
         .timeline-content h2 {
             color: var(--primary);
             margin-bottom: 1rem;
         }
-        
+
         .timeline-month {
             display: inline-block;
             padding: 0.25rem 0.75rem;
-            background-color: var(--primary);
+            background: var(--gradient-primary);
             color: white;
-            border-radius: 4px;
+            border-radius: 20px;
             margin-bottom: 1rem;
+            animation: fadeIn 1s ease;
         }
-        
+
         .timeline-list {
             list-style-type: none;
             margin-left: 1rem;
         }
-        
+
         .timeline-list li {
             margin-bottom: 0.5rem;
             position: relative;
             padding-left: 1.5rem;
         }
-        
+
         .timeline-list li::before {
             content: '•';
             color: var(--secondary);
@@ -166,22 +213,22 @@
             left: 0;
             top: -0.25rem;
         }
-        
+
         .nested-list {
             margin-left: 1.5rem;
             margin-top: 0.5rem;
             list-style-type: circle;
         }
-        
+
         .nested-list li {
             padding-left: 0;
             margin-bottom: 0.25rem;
         }
-        
+
         .nested-list li::before {
             display: none;
         }
-        
+
         .phase-toggle {
             display: flex;
             justify-content: center;
@@ -189,69 +236,72 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
         }
-        
+
         .phase-btn {
-            background-color: white;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            background: var(--gradient-button);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            animation: fadeIn 1s ease;
         }
-        
+
         .phase-btn:hover {
-            background-color: var(--primary);
-            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(252, 61, 33, 0.3);
         }
-        
+
         .phase-btn.active {
-            background-color: var(--primary);
-            color: white;
+            background: var(--gradient-primary);
         }
-        
+
         .phase {
             display: none;
+            animation: fadeIn 0.5s ease;
         }
-        
+
         .phase.active {
             display: block;
         }
-        
+
         .download-section {
             text-align: center;
             margin: 3rem 0;
         }
-        
+
         .download-btn {
             display: inline-block;
-            background-color: var(--secondary);
+            background: var(--gradient-secondary);
             color: white;
             padding: 0.75rem 1.5rem;
-            border-radius: 4px;
+            border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
-            transition: background-color 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .download-btn:hover {
-            background-color: #e03721;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(252, 61, 33, 0.3);
         }
-        
+
         footer {
-            background-color: var(--dark);
+            background: var(--gradient-primary);
             color: white;
             text-align: center;
             padding: 2rem 1rem;
             margin-top: 3rem;
+            animation: gradientAnimation 10s ease infinite;
         }
-        
+
         .progress-container {
             margin: 2rem auto;
             max-width: 800px;
         }
-        
+
         .progress-bar {
             width: 100%;
             background-color: #ddd;
@@ -260,143 +310,148 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .progress-fill {
             height: 100%;
-            background-color: var(--success);
+            background: var(--gradient-primary);
             border-radius: 10px;
             width: 0;
             transition: width 1s ease;
         }
-        
+
         .progress-status {
             text-align: center;
             margin-top: 0.5rem;
             font-weight: bold;
         }
-        
+
         /* Event Schedule Styles */
         .schedule-container {
             margin: 3rem 0;
         }
-        
+
         .schedule-day {
             margin-bottom: 2rem;
         }
-        
+
         .schedule-day h3 {
-            background-color: var(--primary);
+            background: var(--gradient-primary);
             color: white;
             padding: 1rem;
-            border-radius: 6px 6px 0 0;
+            border-radius: 12px 12px 0 0;
             margin-bottom: 0;
+            animation: fadeIn 1s ease;
         }
-        
+
         .schedule-table {
             width: 100%;
             border-collapse: collapse;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 12px 12px;
         }
-        
+
         .schedule-table th,
         .schedule-table td {
             padding: 0.75rem 1rem;
             border: 1px solid #ddd;
         }
-        
+
         .schedule-table th {
             background-color: var(--light);
             font-weight: bold;
             text-align: left;
         }
-        
+
         .schedule-table tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        
+
         .schedule-table tr:hover {
             background-color: #f1f1f1;
         }
-        
+
         /* Registration Info Styles */
         .registration-info {
             background-color: white;
             padding: 2rem;
-            border-radius: 6px;
+            border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
+            animation: fadeIn 1s ease;
         }
-        
+
         .registration-info h3 {
             color: var(--primary);
             margin-bottom: 1rem;
         }
-        
+
         .registration-info p {
             margin-bottom: 1rem;
         }
-        
+
         .registration-btn {
             display: inline-block;
-            background-color: var(--secondary);
+            background: var(--gradient-secondary);
             color: white;
             padding: 0.75rem 1.5rem;
-            border-radius: 4px;
+            border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
-            transition: background-color 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-top: 1rem;
         }
-        
+
         .registration-btn:hover {
-            background-color: #e03721;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(252, 61, 33, 0.3);
         }
-        
+
         .project-types {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
             margin-top: 1rem;
         }
-        
+
         .project-type {
             background-color: var(--light);
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.9rem;
+            animation: fadeIn 1s ease;
         }
-        
+
         @media screen and (max-width: 768px) {
             .timeline::before {
                 left: 31px;
             }
-            
+
             .timeline-container {
                 width: 100%;
                 padding-left: 70px;
                 padding-right: 25px;
             }
-            
+
             .timeline-container.left,
             .timeline-container.right {
                 left: 0;
             }
-            
+
             .timeline-container.left::after,
             .timeline-container.right::after {
                 left: 18px;
             }
-            
+
             .schedule-table {
                 font-size: 0.9rem;
             }
-            
+
             .schedule-table th,
             .schedule-table td {
                 padding: 0.5rem;
             }
-            
+
             .project-types {
                 justify-content: center;
             }
@@ -410,20 +465,20 @@
             <p class="subheading">Hackathon Preparation Roadmap</p>
         </div>
     </header>
-    
+
     <main>
         <section class="intro">
             <h2>Prepare for Success</h2>
             <p>Follow this comprehensive roadmap to maximize your team's potential for the NASA Space Apps Challenge. Build skills, practice projects, and prepare for the competition with our structured timeline.</p>
         </section>
-        
+
         <div class="progress-container">
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
             <div class="progress-status" id="progressStatus">Progress: 0%</div>
         </div>
-        
+
         <div class="phase-toggle">
             <button class="phase-btn active" data-phase="learning">Learning Phase</button>
             <button class="phase-btn" data-phase="development">Project Development Phase</button>
@@ -432,7 +487,7 @@
             <button class="phase-btn" data-phase="event">Event Schedule</button>
             <button class="phase-btn" data-phase="registration">Registration</button>
         </div>
-        
+
         <section class="phase active" id="learning-phase">
             <h2>Learning Phase</h2>
             <div class="timeline">
@@ -459,7 +514,7 @@
                 </div>
             </div>
         </section>
-        
+
         <section class="phase" id="development-phase">
             <h2>Project Development Phase</h2>
             <div class="timeline">
@@ -489,7 +544,7 @@
                 </div>
             </div>
         </section>
-        
+
         <section class="phase" id="practice-phase">
             <h2>Hackathon Practice Phase</h2>
             <div class="timeline">
@@ -519,7 +574,7 @@
                 </div>
             </div>
         </section>
-        
+
         <section class="phase" id="preparation-phase">
             <h2>NASA Space Apps Challenge Preparation</h2>
             <div class="timeline">
@@ -539,7 +594,7 @@
                 </div>
             </div>
         </section>
-        
+
         <section class="phase" id="event-phase">
             <h2>EVENT SCHEDULE</h2>
             <div class="schedule-container">
@@ -620,7 +675,7 @@
                         </tbody>
                     </table>
                 </div>
-                
+
                 <div class="schedule-day">
                     <h3>Event Day 2 - October 5, 2025</h3>
                     <table class="schedule-table">
@@ -680,21 +735,21 @@
                 </div>
             </div>
         </section>
-        
+
         <section class="phase" id="registration-phase">
             <h2>REGISTRATION INFORMATION</h2>
             <div class="registration-info">
                 <h3>Preliminary Registration Process</h3>
                 <p>You are requested to fill up the information with Correct & Real statements. By this application, you will be nominated for the second step. You can apply with your team only. Please follow the instructions properly when you are going to fill up the form.</p>
-                
+
                 <h3>About the Event</h3>
                 <p>NASA Space Apps Challenge is an international mass collaboration focused on space exploration that takes place over 48 hours in cities around the world. NASA is going to organize this global event with the Bangladesh Association of Software and Information Services (BASIS) as the local organizer for the event in Bangladesh.</p>
-                
+
                 <p>This mega event will be solely supported by BASIS Student's Forum. BASIS is the core organizer of the International Space Apps Challenge 2025 across Bangladesh where Dhaka, Chattogram, Sylhet, Rajshahi, Rangpur, Barisal, Khulna, Cumilla & Mymensingh will be the participating cities.</p>
-                
+
                 <h3>What Your Project Should Highlight</h3>
                 <p>Visit <a href="https://www.spaceappschallenge.org" target="_blank">www.spaceappschallenge.org</a> for more information about project requirements and guidelines.</p>
-                
+
                 <h3>Project Types</h3>
                 <div class="project-types">
                     <span class="project-type">Beginner/Youth</span>
@@ -713,62 +768,62 @@
                     <span class="project-type">Space Exploration</span>
                     <span class="project-type">Sun</span>
                 </div>
-                
+
                 <a href="#" class="registration-btn">Begin Registration</a>
             </div>
         </section>
-        
+
         <section class="download-section">
             <h2>Download Resources</h2>
             <p>Get the complete roadmap document for offline reference.</p>
             <a href="#" class="download-btn">Download Roadmap PDF</a>
         </section>
     </main>
-    
+
     <footer>
         <p>NASA Space Apps Challenge - Hackathon Preparation Roadmap</p>
     </footer>
-    
+
     <script>
         // Tab switching functionality
         const phaseButtons = document.querySelectorAll('.phase-btn');
         const phases = document.querySelectorAll('.phase');
-        
+
         phaseButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const phaseId = button.getAttribute('data-phase');
-                
+
                 // Update active button
                 phaseButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-                
+
                 // Update active phase
                 phases.forEach(phase => phase.classList.remove('active'));
                 document.getElementById(`${phaseId}-phase`).classList.add('active');
-                
+
                 // Update progress bar
                 updateProgress();
             });
         });
-        
+
         // Progress bar functionality
         function updateProgress() {
             const months = ['May', 'June', 'July', 'August', 'September', 'October'];
             const currentDate = new Date();
             const currentMonth = currentDate.getMonth(); // 0-based (0 is January)
-            
+
             // Convert to our roadmap months (0 is May)
             const startMonth = 4; // May
             const endMonth = 9; // October
             const roadmapProgress = Math.max(0, Math.min(100, ((currentMonth - startMonth + 12) % 12) * 20));
-            
+
             const progressFill = document.getElementById('progressFill');
             const progressStatus = document.getElementById('progressStatus');
-            
+
             progressFill.style.width = `${roadmapProgress}%`;
             progressStatus.textContent = `Progress: ${Math.round(roadmapProgress)}%`;
         }
-        
+
         // Initialize progress
         updateProgress();
     </script>

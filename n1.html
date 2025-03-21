@@ -18,20 +18,163 @@
             --gradient-button: linear-gradient(135deg, #FF6B4A 0%, #FFC107 100%);
             --gradient-timeline: linear-gradient(135deg, #0B3D91 0%, #1C6FD9 100%);
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
             background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
         }
-
+        
+        /* Login Header Styles */
+        .login-header {
+            background: var(--dark);
+            color: white;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .login-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .login-form {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .login-input {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .login-btn {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(252, 61, 33, 0.3);
+        }
+        
+        .user-profile {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .user-profile span {
+            font-weight: bold;
+        }
+        
+        .logout-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .login-modal-content h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .login-modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .login-modal-input {
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+        
+        .login-modal-btn {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .login-modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(252, 61, 33, 0.3);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .login-error {
+            color: red;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        /* Rest of your existing styles */
         header {
             background: var(--gradient-header);
             color: white;
@@ -41,13 +184,13 @@
             overflow: hidden;
             animation: gradientAnimation 10s ease infinite;
         }
-
+        
         @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
+        
         header::before {
             content: "";
             position: absolute;
@@ -61,57 +204,57 @@
             opacity: 0.2;
             z-index: 0;
         }
-
+        
         .header-content {
             position: relative;
             z-index: 1;
         }
-
+        
         h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
             animation: fadeInDown 1s ease;
         }
-
+        
         .subheading {
             font-size: 1.5rem;
             max-width: 800px;
             margin: 0 auto;
             animation: fadeInUp 1s ease;
         }
-
+        
         @keyframes fadeInDown {
             0% { opacity: 0; transform: translateY(-20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
+        
         @keyframes fadeInUp {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
+        
         main {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
-
+        
         .intro {
             text-align: center;
             margin-bottom: 3rem;
             animation: fadeIn 1.5s ease;
         }
-
+        
         @keyframes fadeIn {
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
-
+        
         .timeline {
             position: relative;
             margin: 3rem 0;
         }
-
+        
         .timeline::before {
             content: '';
             position: absolute;
@@ -124,13 +267,13 @@
             border-radius: 10px;
             animation: pulse 2s infinite;
         }
-
+        
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
-
+        
         .timeline-container {
             padding: 10px 40px;
             position: relative;
@@ -138,15 +281,15 @@
             width: 50%;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
-
+        
         .timeline-container.left {
             left: 0;
         }
-
+        
         .timeline-container.right {
             left: 50%;
         }
-
+        
         .timeline-container::after {
             content: '';
             position: absolute;
@@ -160,11 +303,11 @@
             z-index: 1;
             animation: pulse 2s infinite;
         }
-
+        
         .timeline-container.right::after {
             left: -13px;
         }
-
+        
         .timeline-content {
             padding: 20px 30px;
             background-color: white;
@@ -173,17 +316,17 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
+        
         .timeline-content:hover {
             transform: translateY(-10px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         }
-
+        
         .timeline-content h2 {
             color: var(--primary);
             margin-bottom: 1rem;
         }
-
+        
         .timeline-month {
             display: inline-block;
             padding: 0.25rem 0.75rem;
@@ -193,18 +336,18 @@
             margin-bottom: 1rem;
             animation: fadeIn 1s ease;
         }
-
+        
         .timeline-list {
             list-style-type: none;
             margin-left: 1rem;
         }
-
+        
         .timeline-list li {
             margin-bottom: 0.5rem;
             position: relative;
             padding-left: 1.5rem;
         }
-
+        
         .timeline-list li::before {
             content: '•';
             color: var(--secondary);
@@ -213,22 +356,22 @@
             left: 0;
             top: -0.25rem;
         }
-
+        
         .nested-list {
             margin-left: 1.5rem;
             margin-top: 0.5rem;
             list-style-type: circle;
         }
-
+        
         .nested-list li {
             padding-left: 0;
             margin-bottom: 0.25rem;
         }
-
+        
         .nested-list li::before {
             display: none;
         }
-
+        
         .phase-toggle {
             display: flex;
             justify-content: center;
@@ -236,7 +379,7 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
         }
-
+        
         .phase-btn {
             background: var(--gradient-button);
             color: white;
@@ -248,30 +391,30 @@
             border: none;
             animation: fadeIn 1s ease;
         }
-
+        
         .phase-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(252, 61, 33, 0.3);
         }
-
+        
         .phase-btn.active {
             background: var(--gradient-primary);
         }
-
+        
         .phase {
             display: none;
             animation: fadeIn 0.5s ease;
         }
-
+        
         .phase.active {
             display: block;
         }
-
+        
         .download-section {
             text-align: center;
             margin: 3rem 0;
         }
-
+        
         .download-btn {
             display: inline-block;
             background: var(--gradient-secondary);
@@ -282,12 +425,12 @@
             font-weight: bold;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
+        
         .download-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(252, 61, 33, 0.3);
         }
-
+        
         footer {
             background: var(--gradient-primary);
             color: white;
@@ -296,12 +439,12 @@
             margin-top: 3rem;
             animation: gradientAnimation 10s ease infinite;
         }
-
+        
         .progress-container {
             margin: 2rem auto;
             max-width: 800px;
         }
-
+        
         .progress-bar {
             width: 100%;
             background-color: #ddd;
@@ -310,7 +453,7 @@
             position: relative;
             overflow: hidden;
         }
-
+        
         .progress-fill {
             height: 100%;
             background: var(--gradient-primary);
@@ -318,22 +461,22 @@
             width: 0;
             transition: width 1s ease;
         }
-
+        
         .progress-status {
             text-align: center;
             margin-top: 0.5rem;
             font-weight: bold;
         }
-
+        
         /* Event Schedule Styles */
         .schedule-container {
             margin: 3rem 0;
         }
-
+        
         .schedule-day {
             margin-bottom: 2rem;
         }
-
+        
         .schedule-day h3 {
             background: var(--gradient-primary);
             color: white;
@@ -342,7 +485,7 @@
             margin-bottom: 0;
             animation: fadeIn 1s ease;
         }
-
+        
         .schedule-table {
             width: 100%;
             border-collapse: collapse;
@@ -350,27 +493,27 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 0 0 12px 12px;
         }
-
+        
         .schedule-table th,
         .schedule-table td {
             padding: 0.75rem 1rem;
             border: 1px solid #ddd;
         }
-
+        
         .schedule-table th {
             background-color: var(--light);
             font-weight: bold;
             text-align: left;
         }
-
+        
         .schedule-table tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-
+        
         .schedule-table tr:hover {
             background-color: #f1f1f1;
         }
-
+        
         /* Registration Info Styles */
         .registration-info {
             background-color: white;
@@ -380,16 +523,16 @@
             margin-bottom: 2rem;
             animation: fadeIn 1s ease;
         }
-
+        
         .registration-info h3 {
             color: var(--primary);
             margin-bottom: 1rem;
         }
-
+        
         .registration-info p {
             margin-bottom: 1rem;
         }
-
+        
         .registration-btn {
             display: inline-block;
             background: var(--gradient-secondary);
@@ -401,19 +544,19 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-top: 1rem;
         }
-
+        
         .registration-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(252, 61, 33, 0.3);
         }
-
+        
         .project-types {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
             margin-top: 1rem;
         }
-
+        
         .project-type {
             background-color: var(--light);
             padding: 0.5rem 1rem;
@@ -421,44 +564,87 @@
             font-size: 0.9rem;
             animation: fadeIn 1s ease;
         }
-
+        
         @media screen and (max-width: 768px) {
             .timeline::before {
                 left: 31px;
             }
-
+        
             .timeline-container {
                 width: 100%;
                 padding-left: 70px;
                 padding-right: 25px;
             }
-
+        
             .timeline-container.left,
             .timeline-container.right {
                 left: 0;
             }
-
+        
             .timeline-container.left::after,
             .timeline-container.right::after {
                 left: 18px;
             }
-
+        
             .schedule-table {
                 font-size: 0.9rem;
             }
-
+        
             .schedule-table th,
             .schedule-table td {
                 padding: 0.5rem;
             }
-
+        
             .project-types {
                 justify-content: center;
+            }
+        
+            .login-header {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.5rem;
+            }
+        
+            .login-form {
+                flex-direction: column;
+                width: 100%;
+            }
+        
+            .login-input {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Login Header -->
+    <div class="login-header">
+        <div class="logo">
+            <strong>NASA Space Apps 2025</strong>
+        </div>
+        <div class="login-container">
+            <button id="showLoginBtn" class="login-btn">Log In</button>
+            <div id="userProfile" class="user-profile">
+                <span id="welcomeUser">Welcome, User</span>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-modal-content">
+            <button id="closeModal" class="close-modal">&times;</button>
+            <h3>Login to NASA Space Apps Challenge</h3>
+            <div id="loginError" class="login-error">Invalid username or password</div>
+            <form id="loginModalForm" class="login-modal-form">
+                <input type="text" id="username" class="login-modal-input" placeholder="Username" required>
+                <input type="password" id="password" class="login-modal-input" placeholder="Password" required>
+                <button type="submit" class="login-modal-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
     <header>
         <div class="header-content">
             <h1>NASA Space Apps Challenge</h1>
@@ -785,6 +971,45 @@
     </footer>
 
     <script>
+        // Login Modal Functionality
+        const showLoginBtn = document.getElementById('showLoginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const closeModal = document.getElementById('closeModal');
+        const loginModalForm = document.getElementById('loginModalForm');
+        const loginError = document.getElementById('loginError');
+        const userProfile = document.getElementById('userProfile');
+        const welcomeUser = document.getElementById('welcomeUser');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        showLoginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+
+        closeModal.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        loginModalForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Simulate login (replace with actual authentication logic)
+            if (username === 'user' && password === 'password') {
+                loginError.style.display = 'none';
+                loginModal.style.display = 'none';
+                userProfile.style.display = 'flex';
+                welcomeUser.textContent = `Welcome, ${username}`;
+            } else {
+                loginError.style.display = 'block';
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            userProfile.style.display = 'none';
+            showLoginBtn.style.display = 'block';
+        });
+
         // Tab switching functionality
         const phaseButtons = document.querySelectorAll('.phase-btn');
         const phases = document.querySelectorAll('.phase');

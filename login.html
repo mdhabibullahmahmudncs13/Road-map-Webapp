@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(45deg, #FF5F6D, #FFC371, #6A82FB, #FC5C7D);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            padding: 2.5rem;
+            border: 4px solid #fff;
+            transform: translateY(0);
+            transition: transform 0.3s;
+        }
+        
+        .login-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-header h1 {
+            color: #6A11CB;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #6A11CB;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #6A11CB;
+            box-shadow: 0 0 8px rgba(106, 17, 203, 0.4);
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 1.5rem;
+        }
+        
+        .forgot-password a {
+            color: #FF5F6D;
+            font-size: 0.9rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+            color: #FF3E50;
+        }
+        
+        .login-button {
+            width: 100%;
+            background: linear-gradient(45deg, #6A11CB, #2575FC);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-button:hover {
+            background: linear-gradient(45deg, #5700b3, #1e68e6);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .login-button:active {
+            transform: translateY(0);
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: 1.8rem;
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .register-link a {
+            color: #FF5F6D;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+            color: #FF3E50;
+        }
+        
+        .error-message {
+            color: #FF3E50;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+            font-weight: 500;
+        }
+        
+        .form-icon {
+            position: absolute;
+            right: 10px;
+            top: 42px;
+            color: #6A11CB;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Event Access</h1>
+            <p>Enter your event credentials to continue</p>
+        </div>
+        
+        <form id="login-form">
+            <div class="form-group">
+                <label for="eventName">Event Name</label>
+                <input type="text" id="eventName" placeholder="Enter your event name" required>
+                <div class="error-message" id="eventName-error"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="pass">Pass</label>
+                <input type="password" id="pass" placeholder="Enter your event pass" required>
+                <div class="error-message" id="pass-error"></div>
+            </div>
+            
+            <div class="forgot-password">
+                <a href="#">Forgot Your Pass?</a>
+            </div>
+            
+            <button type="submit" class="login-button">Enter Event</button>
+            
+            <div class="register-link">
+                Need an invitation? <a href="#">Register Now</a>
+            </div>
+        </form>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Reset error messages
+            document.getElementById('eventName-error').style.display = 'none';
+            document.getElementById('pass-error').style.display = 'none';
+            
+            // Get form values
+            const eventName = document.getElementById('eventName').value;
+            const pass = document.getElementById('pass').value;
+            
+            // Basic validation
+            let isValid = true;
+            
+            if (!eventName || eventName.length < 3) {
+                document.getElementById('eventName-error').textContent = 'Please enter a valid event name (min 3 characters)';
+                document.getElementById('eventName-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!pass || pass.length < 4) {
+                document.getElementById('pass-error').textContent = 'Pass must be at least 4 characters';
+                document.getElementById('pass-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Hash the input values
+                const hashedEventName = CryptoJS.SHA256(eventName).toString();
+                const hashedPass = CryptoJS.SHA256(pass).toString();
+                
+                // Predefined hashed values for "nasa-app" and "2025"
+                const correctHashedEventName = CryptoJS.SHA256("nasa-app").toString();
+                const correctHashedPass = CryptoJS.SHA256("2025").toString();
+                
+                // Compare the hashed values
+                if (hashedEventName === correctHashedEventName && hashedPass === correctHashedPass) {
+                    alert('Welcome to the event! Access granted.');
+                    // In a real application, you might redirect the user or perform other actions
+                    // window.location.href = 'event-dashboard.html';
+                } else {
+                    alert('Invalid event name or pass. Access denied.');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
